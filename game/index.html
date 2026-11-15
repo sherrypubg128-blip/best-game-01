@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Lumen Drift — a neon arcade game: collect the light, dodge the void, survive 10 waves.">
+<link rel="icon" href="data:,">
+<title>Lumen Drift — collect the light, dodge the void</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #04060f; height: 100%; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { width: min(100vw, 177.78vh); height: auto; display: block; background: #070a18; }
+  #debug { display: none; }
+</style>
+</head>
+<body>
+<canvas id="game" width="1280" height="720"></canvas>
+<div id="debug"></div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
