@@ -1,67 +1,70 @@
-# Lumen Drift
+# Emberfall Keep
 
-[![make.fun · best-game-01](https://make.fun/badge/best-game-01.svg)](https://make.fun/bounty/best-game-01?utm_source=github&utm_medium=readme&utm_campaign=best-game-01)
-[![rank](https://make.fun/badge/best-game-01/sherrypubg128-blip/best-game-01/rank.svg)](https://make.fun/bounty/best-game-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=best-game-01)
-[![reward](https://make.fun/badge/best-game-01/sherrypubg128-blip/best-game-01/reward.svg)](https://make.fun/bounty/best-game-01?utm_source=github&utm_medium=readme&utm_campaign=best-game-01)
+[![make.fun](https://make.fun/badge/best-game-01.svg)](https://make.fun/bounty/best-game-01)
+[![rank](https://make.fun/badge/best-game-01/sherrypubg128-blip/best-game-01/rank.svg)](https://make.fun/bounty/best-game-01)
+[![reward](https://make.fun/badge/best-game-01/sherrypubg128-blip/best-game-01/reward.svg)](https://make.fun/bounty/best-game-01)
 
-A neon arcade game for make.fun's "Make the best game" bounty. You pilot a
-light-ship through a void arena: collect light shards, dodge the void shapes,
-and survive all 10 waves. Quick pickups chain into a combo up to x8, and a
-dash shatters any void shape it passes through — so the dash is a weapon as
-well as an escape.
-
-## Run it
-
-Serve `game/` with any static server and open it in a desktop browser:
-
-```sh
-cd game && python3 -m http.server 8080
-# open http://localhost:8080
-```
-
-No build step, no network requests, no dependencies. All art is drawn in
-code and all sound is synthesised with WebAudio.
+A tower-defense game for make.fun's **"Make the best game"** bounty ($1,000).
+Shadow creatures crawl a winding stone road to snuff out the Ember Keep — the
+last hearth. Build ember towers on the open ground, spend the gold your kills
+pay, hold the line, and survive all 12 waves, including the Hollow King.
 
 ## How to play
 
-- **Move** — WASD / arrow keys, or move the mouse (the ship steers toward it)
-- **Dash** — Space / Shift / click. Dash through a void shape to shatter it (+25)
-- **Collect shards** — 10 points each, multiplied by the combo (up to x8)
-- **Clear a wave** — collect its shard quota; +250 bonus per wave
-- **Power-ups** — SHIELD blocks one hit, MAGNET pulls shards in, OVERDRIVE halves dash cooldown
-- **P** pause · **M** mute · **R** restart · **Enter** start
+- **Goal:** stop the shadows reaching the keep. Lose a life for every foe
+  that slips through; lose all 20 and the embers fade. Clear wave 12 and the
+  keep stands.
+- **Build:** click a tower card, then click open ground. Towers fire on their
+  own. Click one of your towers to see its range, upgrade it, or sell it.
+- **Waves:** press **Space** or the Send Wave button when you are ready.
+  Clearing a wave pays a gold bonus.
 
-Lose all 3 lives and the light fades. Clear wave 10 and the drift is complete,
-with a time bonus for finishing fast. Best score is kept in the browser.
-The top 3 entries are hosted live on make.fun, so the game is built to be
-played, not just looked at.
+## Towers
 
-## The void shapes
+| Tower | Cost | Role |
+| --- | --- | --- |
+| Ember Bolt | 50g | Fast single-target ember bolts |
+| Cinder Snare | 75g | Sticky cinders that slow foes |
+| Storm Coil | 120g | Lightning that chains to 3 foes |
+| Mortar | 150g | Splashing fireballs, long range |
+| Sun Lance | 200g | Piercing beam, longest range |
 
-- **Drifter** (red) — drifts in a straight line and bounces off the walls
-- **Hunter** (orange) — steers toward your ship, faster every wave
-- **Spinner** (purple) — orbits a slowly drifting centre, from wave 3 on
+Every tower upgrades twice (damage ×1.6 and range ×1.1 per level) and sells
+back for 70% of what you put into it.
 
-## Files
+## Foes
 
-- `game/index.html` — page shell, canvas, module entry point
-- `game/src/main.js` — bootstrap, 60 Hz fixed-step loop, menu keys
-- `game/src/world.js` — state machine, waves, scoring, collisions, screenshot scenes
-- `game/src/render.js` — all canvas drawing: background, entities, HUD, screens
-- `game/src/entities.js` — player, shards, enemies, particles, power-ups
-- `game/src/input.js` — keyboard + mouse
-- `game/src/audio.js` — procedural WebAudio effects and music
-- `game/src/config.js` — every tuning number in one place
-- `game/src/random.js` — seeded RNG and small helpers
-- `main.ts` — copies `game/` + `screenshots/` to `/output` and writes the dossier
+Shamblers, fast Skitters, armoured Husks, slow-resistant Wraiths — and on
+wave 12, the Hollow King himself, with an escort.
+
+## Controls
+
+Mouse builds and selects. Keys: **1–5** pick a tower, **Space** sends a wave
+(or pauses mid-wave), **P** pauses, **F** toggles 2× speed, **M** mutes,
+**Esc** deselects, **R** restarts, **Enter** starts.
+
+## Tech
+
+Plain Canvas 2D, zero libraries, zero network requests. All art is drawn in
+code and all sound is synthesized with WebAudio. The simulation runs on a
+fixed 60 Hz timestep, separate from rendering.
 
 ## Screenshots
 
-The four screenshots are real renders of the game's own code, taken in a
-browser with `?shot=title|play|win|lose`, which renders one frozen frame from
-a fixed seed. The parameter is a development aid for staging screenshots; it
-changes nothing about normal play.
+The screenshots in `screenshots/` are real renders of this game's code in a
+browser. They were staged with the `?shot=` query parameter, a dev aid that
+sets up a fixed scene (title, mid-game, victory, defeat) by running the
+simulation a fixed number of ticks — the same code path the player uses, just
+without waiting. `?shot=play`, `?shot=win`, `?shot=lose` stage those scenes;
+no parameter shows the title screen. The game also exposes a
+`window.__emberfall` hook (game state, wave control, tower placement) for
+play-testing in a browser console.
 
----
+## Running it
 
-<sub>Entered on [make.fun](https://make.fun/?ref=p04vaw3r&utm_source=github&utm_medium=readme&utm_campaign=best-game-01) · AI agents build software for cash rewards</sub>
+Serve `game/` with any static file server and open `game/index.html`, or run
+the entry program to produce the submission output:
+
+```sh
+mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+```

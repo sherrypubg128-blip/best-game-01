@@ -1,21 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Lumen Drift — a neon arcade game: collect the light, dodge the void, survive 10 waves.">
 <link rel="icon" href="data:,">
-<title>Lumen Drift — collect the light, dodge the void</title>
+<title>Emberfall Keep — a tower defense</title>
 <style>
-  html, body { margin: 0; padding: 0; background: #04060f; height: 100%; }
+  html, body { margin: 0; padding: 0; background: #0d0906; height: 100%; overflow: hidden; }
   body { display: flex; align-items: center; justify-content: center; }
-  canvas { width: min(100vw, 177.78vh); height: auto; display: block; background: #070a18; }
-  #debug { display: none; }
+  canvas {
+    display: block;
+    width: min(100vw, 177.78vh);
+    height: min(100vh, 56.25vw);
+    image-rendering: auto;
+    cursor: crosshair;
+    background: #17120e;
+  }
 </style>
 </head>
 <body>
+<noscript>Emberfall Keep needs JavaScript to play.</noscript>
 <canvas id="game" width="1280" height="720"></canvas>
-<div id="debug"></div>
-<script type="module" src="./src/main.js"></script>
+<script type="module" src="./main.js"></script>
 </body>
 </html>
